@@ -26,10 +26,10 @@ const Home = (): JSX.Element => {
   const { addProduct, cart } = useCart();
 
   const cartItemsAmount = cart.reduce((sumAmount, product) => {
-   const newSumAmount = {...sumAmount};
+   const newSumAmount:CartItemsAmount  = {...sumAmount};
    newSumAmount[product.id] = product.amount
    
-    return sumAmount
+    return newSumAmount
   }, {} as CartItemsAmount)
 
 
@@ -45,12 +45,8 @@ const Home = (): JSX.Element => {
     loadProducts();
   }, []);
 
-  function handleAddProduct(id: number) {
-   
+  function handleAddProduct(id: number) { 
       addProduct(id);
-   
-
-  
   }
 
   return (
@@ -75,7 +71,7 @@ const Home = (): JSX.Element => {
               >
                 <div data-testid="cart-product-quantity">
                   <MdAddShoppingCart size={16} color="#FFF" />
-                  {/* {cartItemsAmount[product.id] || 0} */} 2
+                  {cartItemsAmount[product.id] || 0} 
                 </div>
 
                 <span>ADICIONAR AO CARRINHO</span>
